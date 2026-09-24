@@ -4,10 +4,6 @@ import { Zap, Droplets, Wifi, Microchip, ArrowRight } from 'lucide-react'
 export default function DeviceMockup() {
   return (
     <div className="relative">
-      {/* Background glow */}
-      <div className="absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-blue-light via-white to-green-light" />
-
-      {/* Main device frame */}
       <div className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-xl sm:p-8">
         {/* Device header */}
         <div className="mb-6 flex items-center justify-between">

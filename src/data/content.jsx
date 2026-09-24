@@ -46,7 +46,7 @@ export const howItWorksSteps = [
     step: '01',
     title: 'Sensor',
     text: 'Sensor listrik dan air mengumpulkan data konsumsi secara real-time di titik penggunaan.',
-    points: ['PZEM-004T — pemantauan listrik', 'YF-S201 — pemantauan aliran air'],
+    points: ['PZEM-004T: pemantauan listrik', 'YF-S201: pemantauan aliran air'],
     icon: Activity,
   },
   {
@@ -145,7 +145,7 @@ export const features = [
   {
     icon: Activity,
     title: 'Pemantauan Real-Time',
-    text: 'Listrik — tegangan, arus, daya, dan energi (kWh). Air — laju aliran dan volume, diperbarui secara terus-menerus.',
+    text: 'Listrik: tegangan, arus, daya, dan energi (kWh). Air: laju aliran dan volume, diperbarui secara terus-menerus.',
   },
   {
     icon: ScanSearch,

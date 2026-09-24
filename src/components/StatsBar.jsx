@@ -7,40 +7,35 @@ const stats = [
     value: '99.9%',
     label: 'Monitoring Uptime',
     icon: Activity,
-    gradient: 'from-blue to-blue-soft',
-    bg: 'bg-blue-light/70',
+    bg: 'bg-blue-light',
     text: 'text-blue',
   },
   {
     value: '< 2s',
     label: 'Latency Deteksi',
     icon: Zap,
-    gradient: 'from-emerald to-teal',
-    bg: 'bg-emerald-light/70',
-    text: 'text-emerald',
+    bg: 'bg-blue-light',
+    text: 'text-blue',
   },
   {
     value: '50+',
     label: 'Fasilitas Terpantau',
     icon: Boxes,
-    gradient: 'from-violet to-indigo',
-    bg: 'bg-violet-light/70',
-    text: 'text-violet',
+    bg: 'bg-blue-light',
+    text: 'text-blue',
   },
   {
     value: '24/7',
     label: 'Support Aktif',
     icon: Cloud,
-    gradient: 'from-cyan to-sky',
-    bg: 'bg-cyan-light/70',
-    text: 'text-sky',
+    bg: 'bg-blue-light',
+    text: 'text-blue',
   },
 ]
 
 export default function StatsBar() {
   return (
     <div className="relative overflow-hidden border-y border-gray-100 bg-white">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-40 w-[40rem] -translate-x-1/2 rounded-full bg-blue-light/50 blur-3xl" />
       <div className="relative mx-auto max-w-6xl px-5 py-16 sm:px-8">
         <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-4">
           {stats.map((stat, index) => (
@@ -50,12 +45,12 @@ export default function StatsBar() {
               className="group flex flex-col items-center text-center"
             >
               <div
-                className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.gradient} text-white shadow-lg transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-110`}
+                className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${stat.bg} ${stat.text} transition-all duration-300 group-hover:-translate-y-1`}
               >
                 <stat.icon size={26} />
               </div>
 
-              <p className="text-3xl font-extrabold tracking-tight text-navy sm:text-4xl lg:text-[2.75rem]">
+              <p className="tabular-nums font-display text-3xl font-extrabold tracking-tight text-navy sm:text-4xl lg:text-[2.75rem]">
                 {stat.value}
               </p>
 
@@ -63,10 +58,12 @@ export default function StatsBar() {
             </Reveal>
           ))}
         </div>
-      </div>
 
-      {/* Bottom gradient line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue/20 to-transparent" />
+        <p className="mt-10 text-center text-xs text-slate">
+          <span className="demo-chip">Data demo</span>
+          <span className="ml-2">Angka di atas adalah ilustrasi, bukan klaim kinerja nyata.</span>
+        </p>
+      </div>
     </div>
   )
 }

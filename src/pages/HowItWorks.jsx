@@ -17,11 +17,11 @@ export default function HowItWorks() {
 
       <section className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
         <Reveal>
-          <div className="mb-10 rounded-2xl border border-slate-100 bg-white p-4 text-center shadow-[var(--shadow-soft)]">
-            <p className="text-sm font-semibold tracking-wide text-navy">
-              Sensor Listrik &amp; Air <span className="text-green">→</span> SmartFlux Node{' '}
-              <span className="text-green">→</span> Internet <span className="text-green">→</span> Cloud{' '}
-              <span className="text-green">→</span> Dashboard <span className="text-green">→</span> Tindakan
+          <div className="fx-card mb-10 p-5 text-center">
+            <p className="text-sm font-semibold tracking-wide text-fx-text">
+              Sensor Listrik &amp; Air <span className="text-glow-teal">→</span> SmartFlux Node{' '}
+              <span className="text-glow-teal">→</span> Internet <span className="text-glow-teal">→</span> Cloud{' '}
+              <span className="text-glow-teal">→</span> Dashboard <span className="text-glow-teal">→</span> Tindakan
             </p>
           </div>
         </Reveal>
@@ -29,27 +29,27 @@ export default function HowItWorks() {
         <Stagger className="space-y-4" gap={0.1}>
           {howItWorksSteps.map((s, i) => (
             <StaggerItem key={s.step}>
-              <div className="flex gap-5 rounded-2xl border border-slate-100 bg-white p-6 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] sm:p-7">
+              <div className="fx-card fx-card-hover flex gap-5 p-6 sm:p-7">
                 <div className="flex flex-col items-center">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-navy to-blue font-display text-sm font-bold text-white shadow-md">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line bg-panel font-display text-sm font-bold text-glow-cyan shadow-md">
                     {s.step}
                   </span>
                   {i < howItWorksSteps.length - 1 && (
-                    <span className="mt-2 hidden h-full w-px bg-gradient-to-b from-slate-200 to-transparent sm:block" />
+                    <span className="mt-2 hidden h-full w-px bg-gradient-to-b from-line to-transparent sm:block" />
                   )}
                 </div>
                 <div className="flex-1 pb-2">
                   <div className="flex flex-wrap items-center gap-3">
-                    <h2 className="font-display text-xl font-bold text-navy">{s.title}</h2>
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-light to-blue-light/50 text-blue">
+                    <h2 className="font-display text-xl font-bold text-fx-text">{s.title}</h2>
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-panel text-glow-teal">
                       <s.icon size={17} />
                     </span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">{s.text}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-fx-secondary">{s.text}</p>
                   <ul className="mt-3 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
                     {s.points.map((p) => (
-                      <li key={p} className="flex items-center gap-2 text-sm text-ink">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green" />
+                      <li key={p} className="flex items-center gap-2 text-sm text-fx-text">
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-mint" />
                         {p}
                       </li>
                     ))}
@@ -57,7 +57,7 @@ export default function HowItWorks() {
                 </div>
               </div>
               {i < howItWorksSteps.length - 1 && (
-                <div className="my-1 flex justify-center text-green">
+                <div className="my-1 flex justify-center text-glow-teal">
                   <ArrowRight size={18} className="rotate-90" />
                 </div>
               )}
@@ -66,10 +66,10 @@ export default function HowItWorks() {
         </Stagger>
 
         <Reveal className="mt-10" delay={0.05}>
-          <div className="relative overflow-hidden rounded-2xl border border-blue/20 bg-gradient-to-br from-blue-light to-white p-6">
-            <span className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-blue/10 blur-2xl" />
-            <h3 className="mb-2 font-display text-lg font-bold text-navy">Fokus MVP</h3>
-            <p className="text-sm leading-relaxed text-ink">
+          <div className="relative overflow-hidden rounded-2xl border border-line bg-panel p-6">
+            <span className="absolute -right-6 -top-6 h-20 w-20 rounded-full bg-electric/15 blur-2xl" />
+            <h3 className="mb-2 font-display text-lg font-bold text-fx-text">Fokus MVP</h3>
+            <p className="text-sm leading-relaxed text-fx-secondary">
               Produk viable minimum membuktikan alur inti: mengumpulkan data listrik
               dan air, mentransmisikannya dengan andal, menampilkannya di dashboard,
               mendeteksi pola abnormal dasar, dan menghasilkan alert yang bermakna.

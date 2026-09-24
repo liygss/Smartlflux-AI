@@ -11,6 +11,7 @@
   --color-blue: #2f5597;
   --color-blue-soft: #3b67b0;
   --color-blue-bright: #2563eb;
+  --color-azure: #1e6fe0;
   --color-blue-light: #eaf1fa;
 
   /* ======== SECONDARY ACCENTS ======== */
@@ -20,7 +21,8 @@
   --color-cyan-light: #cffafe;
   --color-violet: #8b5cf6;
   --color-violet-light: #f5f3ff;
-  --color-teal: #14b8a6;
+  --color-accent: #4f7fd9;
+  --color-teal: #1aa7a1;
   --color-teal-light: #ccfbf9;
 
   /* ======== SEMANTIC COLORS ======== */
@@ -40,9 +42,10 @@
   --color-sky-light: #e0f2fe;
 
   /* ======== NEUTRAL / GRAY SCALE ======== */
-  --color-ink: #1f2937;
+  --color-ink: #172033;
   --color-slate: #667085;
-  --color-mist: #f6f8fb;
+  --color-muted: #98a2b3;
+  --color-mist: #f7f9fc;
   --color-gray-50: #fafafa;
   --color-gray-100: #f4f4f5;
   --color-gray-200: #e4e4e7;
@@ -53,6 +56,22 @@
   --color-gray-700: #3f3f46;
   --color-gray-800: #27272a;
   --color-gray-900: #18181b;
+
+  /* ======== DARK LANDING (Smart Energy Technology) ======== */
+  --color-deep: #06111f;
+  --color-panel: #0b1724;
+  --color-card: #101c29;
+  --color-line: #1f3142;
+  --color-electric: #3b82f6;
+  --color-glow-cyan: #22d3ee;
+  --color-glow-teal: #14b8a6;
+  --color-glow-violet: #6366f1;
+  --color-mint: #22c55e;
+  --color-fx-warning: #f59e0b;
+  --color-fx-critical: #ef4444;
+  --color-fx-text: #f8fafc;
+  --color-fx-secondary: #94a3b8;
+  --color-fx-muted: #64748b;
 
   /* ======== SHADOWS / ELEVATION ======== */
   --shadow-soft: 0 8px 30px rgba(23, 54, 93, 0.08);
@@ -86,10 +105,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Accessible, consistent focus indicator for every interactive element */
+:focus-visible {
+  outline: 2px solid var(--color-blue-bright);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(47, 85, 151, 0.16);
+  color: #17365d;
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--color-ink);
-  background: #ffffff;
+  background: #06111f;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   line-height: 1.6;
@@ -122,10 +153,6 @@ p {
 }
 
 /* Selection color */
-::selection {
-  background: rgba(47, 85, 151, 0.18);
-  color: #17365d;
-}
 
 /* Decorative moving gradient text for key headlines */
 .text-gradient {
@@ -150,33 +177,42 @@ p {
   color: transparent;
 }
 
-/* Glass morphism effect for modern navbar/cards */
+/* Vivid energy gradient for big live numbers (KPIs, stats) */
+.text-gradient-energi {
+  background: linear-gradient(110deg, #1e6fe0 0%, #0ea5a0 55%, #10b981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Vivid gradient used for brand tiles & primary CTAs */
+.bg-brand-vivid {
+  background: linear-gradient(120deg, #17365d 0%, #1e6fe0 50%, #0ea5a0 120%);
+}
+
+/* Glass morphism is used deliberately as an accent on the scrolled navbar and
+   the hero flow strip (max 2 surfaces), not as a page-wide default */
 .glass {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .glass-dark {
-  background: rgba(23, 54, 93, 0.85);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(23, 54, 93, 0.88);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* Soft dotted/grid background pattern */
+/* Reserved grid texture: only used on dark navy surfaces (page headers, pilot
+   CTA) as a subtle technical motif tied to the energy-monitoring brand */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 34px 34px;
-}
-
-/* Subtle dotted pattern for light backgrounds */
-.bg-dots-light {
-  background-image: radial-gradient(rgba(23, 54, 93, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
 }
 
 /* Professional button hover lift */
@@ -255,6 +291,67 @@ p {
 .animate-gradient-shift {
   background-size: 200% auto;
   animation: shimmer 3.5s linear infinite;
+}
+
+/* ======== DASHBOARD UTILITIES ======== */
+
+/* Tabular numerals keep KPI numbers and chart values aligned and stable */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Refined enterprise card surface: hairline border, quiet shadow, calm hover.
+   Dark variant matches the premium landing theme. */
+.dash-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 6px 20px -8px rgba(0, 0, 0, 0.55);
+  transition: border-color 250ms var(--ease-standard),
+    box-shadow 250ms var(--ease-standard), transform 250ms var(--ease-out-soft);
+}
+
+.dash-card:hover {
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 16px 36px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Segmented control for range / filter switches: one consistent module */
+.segmented {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 0.75rem;
+  background: rgba(11, 23, 36, 0.8);
+  border: 1px solid var(--color-line);
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.segmented .seg-opt {
+  border-radius: 0.625rem;
+  padding: 6px 14px;
+  min-height: 44px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  white-space: nowrap;
+  transition: color 200ms var(--ease-standard),
+    background-color 200ms var(--ease-standard),
+    box-shadow 200ms var(--ease-standard);
+}
+
+.segmented .seg-opt:hover {
+  color: #f8fafc;
+}
+
+.segmented .seg-opt[aria-pressed="true"] {
+  background: rgba(59, 130, 246, 0.16);
+  color: #f8fafc;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
 }
 
 /* ======== HERO-SPECIFIC EFFECTS ======== */
@@ -406,4 +503,94 @@ p {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Demo-data notice: honest labeling for prototype content */
+.demo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-panel);
+  color: var(--color-fx-secondary);
+  padding: 0.25rem 0.6rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ======== DARK LANDING FX ======== */
+
+/* Dark translucent card surface for the premium landing theme */
+.fx-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: 1.25rem;
+  transition: border-color 200ms var(--ease-standard),
+    transform 200ms var(--ease-out-soft),
+    box-shadow 200ms var(--ease-standard);
+}
+
+.fx-card-hover:hover {
+  border-color: rgba(34, 211, 238, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(34, 211, 238, 0.06);
+}
+
+/* Energy gradient for highlighted hero words */
+.text-gradient-energy {
+  background: linear-gradient(100deg, #22d3ee 0%, #3b82f6 50%, #6366f1 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle dotted grid for dark sections */
+.bg-dots-dark {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.13) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* Solid dark gradient buttons */
+.btn-gradient-fx {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  transition: box-shadow 180ms var(--ease-standard), transform 180ms var(--ease-out-soft),
+    filter 180ms var(--ease-standard);
+}
+
+.btn-gradient-fx:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.55);
+}
+
+/* Slow float for the hero device */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float-slow {
+  animation: float-slow 7s var(--ease-in-out) infinite;
+}
+
+/* Slow orbit rotation */
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-orbit {
+  animation: orbit-spin 26s linear infinite;
+}
+.animate-orbit-reverse {
+  animation: orbit-spin 34s linear infinite reverse;
+}
+
+/* Concentric TAM/SAM/SOM ring styling */
+.tier-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  background: rgba(11, 23, 36, 0.55);
 }

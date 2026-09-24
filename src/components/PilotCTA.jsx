@@ -5,10 +5,10 @@ import { ArrowRight, Zap } from 'lucide-react'
 
 export default function PilotCTA() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-navy-dark via-navy to-blue py-16 sm:py-20">
-      <div className="bg-grid absolute inset-0 pointer-events-none opacity-60" />
-      <div className="pointer-events-none absolute -left-20 top-0 h-64 w-64 rounded-full bg-green/25 blur-3xl" />
-      <div className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-blue-light/20 blur-3xl" />
+    <section className="relative overflow-hidden bg-deep py-20 sm:py-24">
+      <div className="pointer-events-none absolute inset-0 bg-dots-dark opacity-50" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric/15 blur-[140px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow-cyan/20 blur-[60px]" />
 
       <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
         <motion.span
@@ -16,10 +16,10 @@ export default function PilotCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-green-light"
+          className="mb-5 inline-flex items-center gap-2 rounded-lg border border-line bg-panel/80 px-3.5 py-1.5 text-xs font-bold text-glow-cyan"
         >
           <Zap size={14} />
-          Siap Memulai?
+          Siap Memulai
         </motion.span>
 
         <motion.h2
@@ -27,9 +27,9 @@ export default function PilotCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="font-display text-3xl font-extrabold text-white sm:text-4xl"
+          className="font-display text-3xl font-extrabold text-fx-text sm:text-4xl"
         >
-          Mulai Monitoring Lebih Cerdas
+          Ready to Monitor <span className="text-gradient-energy">Smarter</span>?
         </motion.h2>
 
         <motion.p
@@ -37,11 +37,9 @@ export default function PilotCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.12 }}
-          className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-blue-100 sm:text-lg"
+          className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-fx-secondary sm:text-lg"
         >
-          Tertarik menguji SmartFlux AI di fasilitas Anda? Bicarakan dengan tim kami
-          tentang implementasi pilot dan lihat bagaimana data konsumsi menjadi
-          peringatan dini serta wawasan yang dapat ditindaklanjuti.
+          Mulai pilot SmartFlux AI dan lihat penggunaan listrik dan air dalam satu sistem.
         </motion.p>
 
         <motion.div
@@ -53,15 +51,15 @@ export default function PilotCTA() {
         >
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-green px-6 py-3.5 text-sm font-semibold text-white shadow-[var(--shadow-lift)] transition-all hover:-translate-y-0.5 hover:bg-green/90"
+            className="btn-gradient-fx inline-flex items-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold text-white"
           >
-            Ajukan Pilot <ArrowRight size={16} />
+            Request Pilot <ArrowRight size={16} />
           </Link>
           <Link
-            to="/product"
-            className="rounded-full border border-white/40 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10"
+            to="/dashboard"
+            className="rounded-lg border border-line px-6 py-3.5 text-sm font-semibold text-fx-text transition-colors hover:border-glow-cyan/50 hover:text-glow-cyan"
           >
-            Jelajahi SmartFlux AI
+            View Dashboard Demo
           </Link>
         </motion.div>
       </div>

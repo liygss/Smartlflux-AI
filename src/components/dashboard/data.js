@@ -2,7 +2,7 @@ export const kpi = {
   electricityToday: { value: '125.4 kWh', delta: '-8.2%', trend: 'down', good: true },
   waterToday: { value: '45.6 m³', delta: '-6.7%', trend: 'down', good: true },
   activeAlerts: { value: '3', delta: '2 critical', trend: 'flat', good: false },
-  deviceStatus: { value: '3 / 3', sublabel: 'Node Online', good: true },
+  deviceStatus: { value: '3 / 3 Online', sublabel: 'Semua perangkat terhubung', good: true },
 }
 
 export const realtimeElectricity = [
@@ -35,6 +35,16 @@ export const electricityDaily = [
   { d: 'Jum', e: 122 },
   { d: 'Sab', e: 96 },
   { d: 'Min', e: 88 },
+]
+
+export const electricityDailyPrev = [
+  { d: 'Sen', e: 126 },
+  { d: 'Sel', e: 130 },
+  { d: 'Rab', e: 121 },
+  { d: 'Kam', e: 138 },
+  { d: 'Jum', e: 129 },
+  { d: 'Sab', e: 100 },
+  { d: 'Min', e: 93 },
 ]
 
 export const electricityWeekly = [
@@ -95,53 +105,53 @@ export const waterMonthly = [
 ]
 
 export const forecast = [
-  { m: 'Agu', a: 130, f: 132 },
-  { m: 'Sep', a: null, f: 137 },
-  { m: 'Okt', a: null, f: 138 },
-  { m: 'Nov', a: null, f: 136 },
-  { m: 'Des', a: null, f: 140 },
+  { m: 'Agu', a: 130, f: 132, lo: 127, hi: 137 },
+  { m: 'Sep', a: null, f: 137, lo: 131, hi: 143 },
+  { m: 'Okt', a: null, f: 138, lo: 132, hi: 145 },
+  { m: 'Nov', a: null, f: 136, lo: 130, hi: 143 },
+  { m: 'Des', a: null, f: 140, lo: 133, hi: 148 },
 ]
 
 export const alerts = [
   {
     id: 1,
     level: 'critical',
-    title: 'High Electricity Usage',
+    title: 'Pemakaian listrik tinggi',
     location: 'Panel Listrik LT.2',
     time: '10:23',
-    status: 'Unresolved',
+    status: 'Belum ditangani',
   },
   {
     id: 2,
     level: 'warning',
-    title: 'High Water Usage',
+    title: 'Pemakaian air tinggi',
     location: 'Gedung A',
     time: '09:15',
-    status: 'Unresolved',
+    status: 'Belum ditangani',
   },
   {
     id: 3,
     level: 'warning',
-    title: 'Potential Anomaly — night consumption',
+    title: 'Potensi anomali: konsumsi malam hari',
     location: 'Sayap Kamar A',
     time: '02:40',
-    status: 'Reviewed',
+    status: 'Ditinjau',
   },
   {
     id: 4,
     level: 'normal',
-    title: 'System Normal',
+    title: 'Sistem normal',
     location: 'SmartFlux Node 01',
     time: '08:45',
-    status: 'Resolved',
+    status: 'Ditangani',
   },
   {
     id: 5,
     level: 'warning',
-    title: 'Above baseline 3 days',
-    location: 'Utility Room',
+    title: 'Di atas baseline 3 hari',
+    location: 'Ruang utilitas',
     time: '12:00',
-    status: 'In Progress',
+    status: 'Dalam proses',
   },
 ]
 
@@ -151,7 +161,7 @@ export const devices = [
     name: 'SmartFlux Node 01',
     location: 'Panel LT.1',
     connection: 'Wi-Fi',
-    lastUpdate: '5 sec ago',
+    lastUpdate: '5 detik lalu',
     status: 'online',
     signal: -58,
     firmware: 'v2.4.1',
@@ -164,7 +174,7 @@ export const devices = [
     name: 'SmartFlux Node 02',
     location: 'Panel LT.2',
     connection: 'Wi-Fi',
-    lastUpdate: '8 sec ago',
+    lastUpdate: '8 detik lalu',
     status: 'online',
     signal: -62,
     firmware: 'v2.4.1',
@@ -175,9 +185,9 @@ export const devices = [
   {
     id: 'SF-NODE-003',
     name: 'SmartFlux Node 03',
-    location: 'Utility Room',
+    location: 'Ruang Utilitas',
     connection: 'Wi-Fi',
-    lastUpdate: '2 min ago',
+    lastUpdate: '2 menit lalu',
     status: 'warning',
     signal: -74,
     firmware: 'v2.3.9',
@@ -197,18 +207,18 @@ export const analyticsTrend = [
 ]
 
 export const energyKpi = [
-  { label: 'Voltage', value: '220.5 V', tone: 'blue' },
-  { label: 'Current', value: '5.68 A', tone: 'indigo' },
-  { label: 'Power', value: '1.25 kW', tone: 'teal' },
-  { label: 'Energy Today', value: '125.4 kWh', tone: 'green' },
-  { label: 'Power Factor', value: '0.98', tone: 'cyan' },
+  { label: 'Tegangan', value: '220.5 V', tone: 'blue' },
+  { label: 'Arus', value: '5.68 A', tone: 'indigo' },
+  { label: 'Daya', value: '1.25 kW', tone: 'teal' },
+  { label: 'Energi Hari Ini', value: '125.4 kWh', tone: 'green' },
+  { label: 'Faktor Daya', value: '0.98', tone: 'cyan' },
 ]
 
 export const waterKpi = [
-  { label: 'Flow Rate', value: '12.4 L/mnt', tone: 'cyan' },
-  { label: 'Total Today', value: '45.6 m³', tone: 'teal' },
-  { label: 'Daily Average', value: '41.2 m³', tone: 'green' },
-  { label: 'Peak Consumption', value: '14 m³', tone: 'indigo' },
+  { label: 'Laju Aliran', value: '12.4 L/mnt', tone: 'cyan' },
+  { label: 'Total Hari Ini', value: '45.6 m³', tone: 'teal' },
+  { label: 'Rata-rata Harian', value: '41.2 m³', tone: 'green' },
+  { label: 'Konsumsi Puncak', value: '14 m³', tone: 'indigo' },
 ]
 
 export const recommendations = [
@@ -224,4 +234,4 @@ export const recommendations = [
   },
 ]
 
-export const efficiency = { score: 82, level: 'Efficient' }
+export const efficiency = { score: 82, level: 'Efisien' }

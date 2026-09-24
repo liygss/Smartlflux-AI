@@ -49,30 +49,30 @@ export default function About() {
       />
 
       {/* Vision + Mission */}
-      <Section>
+      <Section variant="dark">
         <Stagger className="grid gap-5 md:grid-cols-2">
           <StaggerItem className="h-full">
-            <Card className="h-full">
-              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-navy to-blue text-white">
-                <Compass size={24} />
+            <Card dark className="h-full p-6">
+              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-panel text-glow-cyan">
+                <Compass size={24} strokeWidth={1.8} />
               </span>
-              <h3 className="mb-2 font-display text-xl font-bold text-navy">Visi Kami</h3>
-              <p className="text-sm leading-relaxed text-slate">
+              <h3 className="mb-2 font-display text-xl font-bold text-fx-text">Visi Kami</h3>
+              <p className="text-sm leading-relaxed text-fx-secondary">
                 Menjadi perusahaan teknologi yang menyediakan solusi manajemen sumber
                 daya yang efisien, terintegrasi, dan berbasis data.
               </p>
             </Card>
           </StaggerItem>
           <StaggerItem className="h-full">
-            <Card className="h-full">
-              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-green to-blue text-white">
-                <Rocket size={24} />
+            <Card dark className="h-full p-6">
+              <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-panel text-glow-teal">
+                <Rocket size={24} strokeWidth={1.8} />
               </span>
-              <h3 className="mb-2 font-display text-xl font-bold text-navy">Misi Kami</h3>
+              <h3 className="mb-2 font-display text-xl font-bold text-fx-text">Misi Kami</h3>
               <ul className="space-y-2">
                 {mission.map((m) => (
-                  <li key={m} className="flex items-start gap-2 text-sm text-slate">
-                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-green" />
+                  <li key={m} className="flex items-start gap-2 text-sm text-fx-secondary">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-mint" />
                     {m}
                   </li>
                 ))}
@@ -83,8 +83,9 @@ export default function About() {
       </Section>
 
       {/* Business strategy */}
-      <Section variant="light" id="strategy">
+      <Section variant="dark" id="strategy">
         <SectionHeader
+          dark
           eyebrow="Strategi Bisnis"
           title="Validasi Dulu, Baru Skala"
           description="SmartFlux tidak langsung berekspansi besar. Ia memprioritaskan pilot dan early adopter pada segmen yang telah ditentukan, lalu tumbuh saat model terbukti."
@@ -92,12 +93,12 @@ export default function About() {
         <Stagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
           {strategyPhases.map((s) => (
             <StaggerItem key={s.phase} className="h-full">
-              <Card className="h-full">
-                <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-navy to-blue text-white">
-                  <s.icon size={20} />
+              <Card dark className="h-full p-6">
+                <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-panel text-glow-cyan">
+                  <s.icon size={20} strokeWidth={1.8} />
                 </span>
-                <h3 className="mb-2 font-display text-base font-bold text-navy">{s.phase}</h3>
-                <p className="text-sm leading-relaxed text-slate">{s.text}</p>
+                <h3 className="mb-2 font-display text-base font-bold text-fx-text">{s.phase}</h3>
+                <p className="text-sm leading-relaxed text-fx-secondary">{s.text}</p>
               </Card>
             </StaggerItem>
           ))}
@@ -105,17 +106,18 @@ export default function About() {
       </Section>
 
       {/* PMF */}
-      <Section>
+      <Section variant="dark">
         <SectionHeader
+          dark
           eyebrow="Product-Market Fit"
           title="Bagaimana Kami Tahu Produk Bekerja"
           description="SmartFlux AI divalidasi dari seberapa jauh ia menyelesaikan masalah nyata customer."
         />
-        <Reveal><Card>
+        <Reveal><Card dark className="p-6">
           <ul className="grid gap-3 sm:grid-cols-2">
             {pmfIndicators.map((p) => (
-              <li key={p} className="flex items-start gap-2 text-sm text-ink">
-                <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-green" />
+              <li key={p} className="flex items-start gap-2 text-sm text-fx-secondary">
+                <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-mint" />
                 {p}
               </li>
             ))}
@@ -124,8 +126,9 @@ export default function About() {
       </Section>
 
       {/* Hypotheses */}
-      <Section variant="mist">
+      <Section variant="dark">
         <SectionHeader
+          dark
           eyebrow="Desirability"
           title="Hipotesis yang Kami Uji"
           description="Divalidasi melalui wawancara, survei, pilot project, dan analisis penggunaan produk."
@@ -133,12 +136,12 @@ export default function About() {
         <Stagger className="grid gap-4 sm:grid-cols-2">
           {hypotheses.map((h) => (
             <StaggerItem key={h} className="h-full">
-              <Card className="h-full">
+              <Card dark className="h-full p-6">
                 <div className="flex gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-light text-green">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-line bg-panel text-glow-teal">
                     <Lightbulb size={16} />
                   </span>
-                  <p className="text-sm text-ink">{h}</p>
+                  <p className="text-sm text-fx-secondary">{h}</p>
                 </div>
               </Card>
             </StaggerItem>

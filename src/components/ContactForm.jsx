@@ -22,8 +22,8 @@ const needs = [
 ]
 
 const inputClass =
-  'w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-ink placeholder:text-slate/70 outline-none transition-colors focus:border-blue focus:ring-2 focus:ring-blue/20'
-const labelClass = 'mb-1.5 block text-sm font-medium text-navy'
+  'w-full rounded-lg border border-line bg-panel px-3.5 py-2.5 text-sm text-fx-text placeholder:text-fx-muted outline-none transition-colors focus:border-glow-cyan focus:ring-2 focus:ring-glow-cyan/25'
+const labelClass = 'mb-1.5 block text-sm font-medium text-fx-text'
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -35,10 +35,10 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-white px-6 py-14 text-center shadow-sm">
-        <CheckCircle2 size={48} className="mb-4 text-green" />
-        <h3 className="font-display text-2xl font-bold text-navy">Permintaan Diterima</h3>
-        <p className="mt-2 max-w-sm text-sm text-slate">
+      <div className="fx-card flex flex-col items-center justify-center px-6 py-14 text-center">
+        <CheckCircle2 size={48} className="mb-4 text-mint" />
+        <h3 className="font-display text-2xl font-bold text-fx-text">Permintaan Diterima</h3>
+        <p className="mt-2 max-w-sm text-sm text-fx-secondary">
           Terima kasih atas ketertarikan Anda pada SmartFlux AI. Tim kami akan
           meninjau permintaan Anda dan menghubungi Anda kembali mengenai langkah
           selanjutnya untuk implementasi pilot.
@@ -48,7 +48,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+    <form onSubmit={handleSubmit} className="fx-card p-6 sm:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label className={labelClass} htmlFor="name">Nama</label>
@@ -103,13 +103,13 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <p className="mt-3 text-xs text-slate">
+      <p className="mt-3 text-xs text-fx-muted">
         Ini adalah formulir demo dan tidak mengirim data nyata.
       </p>
 
       <button
         type="submit"
-        className="mt-5 w-full rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue"
+        className="btn-gradient-fx mt-5 w-full rounded-full px-6 py-3 text-sm font-semibold text-white"
       >
         Ajukan Pilot
       </button>

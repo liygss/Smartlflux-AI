@@ -30,10 +30,10 @@ const cards = [
 ]
 
 const toneMap = {
-  blue: 'bg-blue text-white',
-  green: 'bg-green text-white',
-  amber: 'bg-amber-500 text-white',
-  indigo: 'bg-indigo-500 text-white',
+  blue: 'bg-blue-light text-blue',
+  green: 'bg-green-light text-green',
+  amber: 'bg-amber-light text-amber-700',
+  indigo: 'bg-indigo-light text-indigo-700',
 }
 
 export function DashboardCards() {
@@ -62,14 +62,13 @@ export function DashboardCards() {
 
 export default function DashboardPreview() {
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-lg">
-      <div className="flex items-center justify-between border-b border-slate-100 px-5 py-3">
-        <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-red-300" />
-          <span className="h-3 w-3 rounded-full bg-amber-300" />
-          <span className="h-3 w-3 rounded-full bg-green-300" />
-        </div>
-        <span className="text-xs font-medium text-slate">SmartFlux AI · Dashboard Energi &amp; Air</span>
+    <div className="overflow-hidden rounded-xl border border-gray-200/70 bg-white shadow-[var(--shadow-card-hover)]">
+      <div className="flex items-center justify-between border-b border-gray-100 px-5 py-3">
+        <span className="flex h-7 w-7 items-center justify-center rounded-md bg-navy text-xs font-bold text-white">
+          SF
+        </span>
+        <span className="text-xs font-semibold text-navy">SmartFlux AI · Dashboard Energi &amp; Air</span>
+        <span className="demo-chip">Data demo</span>
       </div>
 
       <div className="space-y-4 p-5">

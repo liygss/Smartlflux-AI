@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Plus, HelpCircle } from 'lucide-react'
 import { Section, SectionHeader } from './ui/Section'
 import { Reveal } from './ui/Reveal'
@@ -6,27 +7,27 @@ import { Reveal } from './ui/Reveal'
 const faqs = [
   {
     question: "Berapa lama waktu implementasi SmartFlux AI?",
-    answer: "Rata-rata implementasi membutuhkan waktu 2-4 minggu tergantung kompleksitas fasilitas dan jumlah titik monitoring. Kami akan melakukan assessment terlebih dahulu untuk memberikan timeline yang akurat."
+    answer: "Rata-rata implementasi membutuhkan waktu 2-4 minggu, tergantung kompleksitas fasilitas dan jumlah titik monitoring. Kami melakukan penilaian awal terlebih dahulu untuk memberikan jadwal yang akurat."
   },
   {
-    question: "Apakah perlu installation hardware baru?",
-    answer: "SmartFlux Node kami sudah plug-and-play. Untuk fasilitas existing, kami bisa integrate dengan sensor yang sudah ada atau install sensor baru jika diperlukan. Hardware kami designed untuk minimal disruption during installation."
+    question: "Apakah perlu pemasangan perangkat keras baru?",
+    answer: "SmartFlux Node bersifat plug-and-play. Untuk fasilitas yang sudah berjalan, kami dapat mengintegrasikan dengan sensor yang sudah ada atau memasang sensor baru bila diperlukan. Pemasangan dirancang agar minim gangguan terhadap operasional."
   },
   {
-    question: "Bagaimana dengan biaya maintenance bulanan?",
-    answer: "Ya, tersedia dalam paket berlangganan yang includes hardware, cloud hosting, AI analytics, dan 24/7 support. Paket kami sangat competitive dibandingkan solusi enterprise lainnya. Hubungi sales kami untuk quote detail."
+    question: "Bagaimana dengan biaya pemeliharaan bulanan?",
+    answer: "Biaya tersedia dalam paket berlangganan yang mencakup perangkat keras, hosting cloud, analitik AI, dan dukungan 24/7. Paket kami dirancang kompetitif dibandingkan solusi enterprise lain. Hubungi tim kami untuk rincian harga."
   },
   {
     question: "Apakah data saya aman?",
-    answer: "Sangat aman! Kami menggunakan encryption end-to-end, compliance dengan standar security internasional, dan data hosting di Indonesia dengan backup otomatis harian. Your data privacy adalah priority kami."
+    answer: "Kami memprioritaskan keamanan data: enkripsi dalam pengiriman data, penyimpanan di server yang aman, dan pencadangan otomatis. Data Anda hanya digunakan untuk kebutuhan sistem pemantauan fasilitas Anda."
   },
   {
-    question: "Bisa integrate dengan sistem existing kami?",
-    answer: "Tentu! SmartFlux AI memiliki open API dan dapat diintegrate dengan BMS, SCADA, atau sistem facility management yang sudah ada. Tim technical kami akan membantu konfigurasi integration."
+    question: "Bisakah diintegrasikan dengan sistem yang sudah ada?",
+    answer: "Bisa. SmartFlux AI menyediakan API terbuka dan dapat diintegrasikan dengan BMS, SCADA, atau sistem manajemen fasilitas yang sudah ada. Tim teknis kami membantu konfigurasi integrasi."
   },
   {
-    question: "Apakah ada trial period atau demo?",
-    answer: "Ya! Kami menyediakan pilot program untuk potential partners. Hubungi tim kami melalui form di halaman Contact untuk schedule demo gratis atau ajukan pilot program di wilayah Anda."
+    question: "Apakah ada program percobaan atau demo?",
+    answer: "Ada. Kami menyediakan program pilot untuk calon mitra. Hubungi tim kami melalui formulir di halaman Kontak untuk menjadwalkan demo atau mengajukan program pilot di wilayah Anda."
   },
 ]
 
@@ -48,45 +49,34 @@ export default function FAQ() {
       <div className="mx-auto max-w-3xl">
         {faqs.map((faq, index) => (
           <Reveal key={faq.question} delay={index * 0.05}>
-            <FAQItem 
+            <FAQItem
               question={faq.question}
               answer={faq.answer}
               isOpen={openIndex === index}
               onToggle={() => toggleFAQ(index)}
-              index={index}
             />
           </Reveal>
         ))}
       </div>
 
-      {/* Additional CTA */}
       <Reveal className="mt-10 text-center">
         <div className="mx-auto max-w-md rounded-2xl border border-blue/10 bg-white p-6 shadow-[var(--shadow-card)]">
           <p className="text-sm text-slate">
-            Masih punya pertanyaan?
+            Masih punya pertanyaan lain?
           </p>
-          <a
-            href="/contact"
-            className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-navy to-blue px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-blue-glow)] transition-transform duration-300 hover:-translate-y-0.5"
+          <Link
+            to="/contact"
+            className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-soft)] transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Hubungi Tim Kami →
-          </a>
+            Hubungi Tim Kami
+          </Link>
         </div>
       </Reveal>
     </Section>
   )
 }
 
-function FAQItem({ question, answer, isOpen, onToggle, index }) {
-  const gradients = [
-    'from-blue to-blue-soft',
-    'from-emerald to-teal',
-    'from-violet to-indigo',
-    'from-cyan to-sky',
-    'from-amber to-orange',
-    'from-rose to-pink',
-  ]
-
+function FAQItem({ question, answer, isOpen, onToggle }) {
   return (
     <div
       className={`overflow-hidden rounded-2xl border bg-white transition-all duration-300 ${
@@ -98,10 +88,11 @@ function FAQItem({ question, answer, isOpen, onToggle, index }) {
       <button
         onClick={onToggle}
         className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-gray-50/60"
+        aria-expanded={isOpen}
       >
         <div className="flex items-center gap-4">
           <div
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${gradients[index % gradients.length]} text-white shadow-lg transition-transform duration-300 ${isOpen ? 'scale-110' : ''}`}
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy text-white transition-transform duration-300 ${isOpen ? 'scale-110' : ''}`}
           >
             <HelpCircle size={20} />
           </div>

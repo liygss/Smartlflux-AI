@@ -73,11 +73,6 @@ export default function LiveDemo() {
 
   return (
     <Section variant="mist" className="relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="pointer-events-none absolute left-1/2 top-[-8rem] h-[30rem] w-[40rem] -translate-x-1/2 rounded-full bg-blue/10 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 left-[-6rem] h-72 w-72 rounded-full bg-indigo-light/50 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-10 right-[-6rem] h-72 w-72 rounded-full bg-teal-light/50 blur-3xl" />
-
       <SectionHeader
         eyebrow="Live Demo"
         title="Saksikan Monitoring Real-Time"
@@ -86,27 +81,30 @@ export default function LiveDemo() {
 
       <Reveal>
         <div className="mx-auto max-w-6xl">
-          <div className="relative overflow-hidden rounded-3xl border border-gray-200/70 bg-white shadow-[var(--shadow-card-hover)]">
-            {/* Browser top bar */}
-            <div className="flex items-center justify-between border-b border-gray-100 bg-gray-50/80 px-5 py-3">
-              <div className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-full bg-rose/80" />
-                <span className="h-3 w-3 rounded-full bg-amber/80" />
-                <span className="h-3 w-3 rounded-full bg-emerald/80" />
+          <div className="relative overflow-hidden rounded-xl border border-gray-200/70 bg-white shadow-[var(--shadow-card-hover)]">
+            {/* App header (clean, not a fake browser window) */}
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 px-4 py-3 sm:px-5 sm:gap-3">
+              <div className="flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-md bg-navy text-xs font-bold text-white">
+                  SF
+                </span>
+                <span className="text-xs font-semibold text-navy">SmartFlux AI · Live Demo</span>
               </div>
-              <div className="flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-medium text-slate shadow-sm">
-                <Wifi size={12} className="text-emerald" />
-                smartflux.ai/dashboard · live
-              </div>
-              <div className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-emerald shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald pulse-ring" />
-                LIVE
+              <div className="flex items-center gap-2 sm:gap-3">
+                <span className="hidden items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-xs font-medium text-slate border border-gray-200 lg:inline-flex">
+                  <Wifi size={12} className="text-emerald" />
+                  smartflux.ai/dashboard (demo)
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-md bg-blue-light px-2.5 py-1 text-xs font-semibold text-blue">
+                  <span className="h-1.5 w-1.5 rounded-full bg-blue" />
+                  Simulasi
+                </span>
               </div>
             </div>
 
             <div className="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
               {/* Left: Live chart */}
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <div className="mb-4 flex items-center justify-between">
                   <h3 className="font-display text-lg font-bold text-navy">
                     Konsumsi Energi · Real-Time
@@ -162,14 +160,14 @@ export default function LiveDemo() {
               </div>
 
               {/* Right: Live stats + alerts */}
-              <div className="flex flex-col gap-4 border-t border-gray-100 p-6 lg:border-l lg:border-t-0">
+              <div className="flex flex-col gap-4 border-t border-gray-100 p-5 lg:border-l lg:border-t-0 sm:p-6">
                 <h3 className="font-display text-lg font-bold text-navy">Status Terkini</h3>
 
                 {/* Listrik stat */}
-                <div className="rounded-2xl border border-gray-100 bg-gradient-to-br from-blue-light/40 to-white p-4">
+                <div className="rounded-xl border border-gray-100 bg-mist p-4">
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-2 text-sm font-semibold text-navy">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue to-blue-soft text-white">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-navy text-white">
                         <Zap size={16} />
                       </span>
                       Listrik
@@ -186,10 +184,10 @@ export default function LiveDemo() {
                 </div>
 
                 {/* Air stat */}
-                <div className="rounded-2xl border border-gray-100 bg-gradient-to-br from-teal-light/30 to-white p-4">
+                <div className="rounded-xl border border-gray-100 bg-mist p-4">
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-2 text-sm font-semibold text-navy">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan to-teal text-white">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal text-white">
                         <Droplets size={16} />
                       </span>
                       Air
@@ -206,10 +204,9 @@ export default function LiveDemo() {
                 </div>
 
                 {/* Alert box */}
-                <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-gray-50/70 p-4">
-                  <span className="scan-line pointer-events-none absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-blue/15 to-transparent" />
+                <div className="relative overflow-hidden rounded-xl border border-gray-100 bg-gray-50/70 p-4">
                   <div className="flex items-center gap-2 text-sm font-semibold text-navy">
-                    <BellRing size={15} className="text-indigo" />
+                    <BellRing size={15} className="text-blue" />
                     Peringatan
                     <span className="ml-auto text-xs font-medium text-slate">terbaru</span>
                   </div>
