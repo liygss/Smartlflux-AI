@@ -46,22 +46,22 @@ export default function HeroVisual() {
       <div className="absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric/10 blur-[110px]" />
       <div className="absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow-cyan/5 blur-[40px]" />
 
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[22rem] w-[22rem] -translate-x-1/2 -translate-y-1/2 lg:h-[24rem] lg:w-[24rem]">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[18rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 lg:h-[30rem] lg:w-[30rem]">
         <div className="animate-orbit absolute inset-0 rounded-full border border-line/80">
           <span className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow-cyan/80" />
           <span className="absolute right-4 bottom-6 h-1.5 w-1.5 rounded-full bg-electric/70" />
         </div>
-        <div className="animate-orbit-reverse absolute inset-6 rounded-full border border-line/60 lg:inset-10 xl:inset-24">
+        <div className="animate-orbit-reverse absolute inset-6 rounded-full border border-line/60 lg:inset-12 xl:inset-24">
           <span className="absolute right-1 top-4 h-1.5 w-1.5 rounded-full bg-glow-teal/70" />
         </div>
       </div>
 
       {/* Video showcase */}
-      <div className="flex w-full items-center justify-center lg:min-h-[30rem]">
-        <div className="animate-float-slow relative mx-auto w-full max-w-[520px]">
+      <div className="flex w-full items-center justify-center lg:min-h-[31rem]">
+        <div className="animate-float-slow relative mx-auto w-full max-w-[600px]">
           <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-panel shadow-[0_50px_120px_-40px_rgba(59,130,246,0.35)]">
             <video
-              className="aspect-video w-full object-cover"
+              className="aspect-[4/3] w-full object-cover"
               src="/dreamina-node.mp4"
               autoPlay
               muted
