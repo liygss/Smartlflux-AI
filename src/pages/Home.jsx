@@ -275,7 +275,7 @@ export default function Home() {
                   Live Monitoring
                 </span>
                 <img
-                  src="/desain produk.jpeg"
+                  src="/desain produk.png"
                   alt="SmartFlux Node"
                   className="mx-auto w-full max-w-md object-contain"
                   loading="lazy"

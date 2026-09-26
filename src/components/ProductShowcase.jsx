@@ -55,7 +55,7 @@ export default function ProductShowcase() {
                 {/* Product Image */}
                 <div className="relative overflow-hidden rounded-lg bg-white/95">
                   <img
-                    src="/desain produk.jpeg"
+                    src="/desain produk.png"
                     alt="SmartFlux AI Device"
                     className="mx-auto w-full object-contain"
                   />
