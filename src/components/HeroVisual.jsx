@@ -7,19 +7,19 @@ const featureCards = [
     icon: Activity,
     title: 'Real-Time Monitoring',
     text: 'Pantau listrik dan air dalam satu dashboard.',
-    pos: 'left-0 top-16 lg:-left-6',
+    pos: 'left-0 top-14 lg:-left-6',
   },
   {
     icon: ScanSearch,
     title: 'Early Warning',
     text: 'Deteksi pola penggunaan abnormal lebih awal.',
-    pos: 'right-0 top-[46%] lg:-right-6',
+    pos: 'right-0 top-[38%] lg:-right-6',
   },
   {
     icon: BarChart3,
     title: 'Actionable Analytics',
     text: 'Ubah data konsumsi menjadi insight operasional.',
-    pos: 'left-0 bottom-14 lg:-left-10',
+    pos: 'left-0 bottom-10 lg:-left-10',
   },
 ]
 
@@ -46,30 +46,32 @@ export default function HeroVisual() {
       <div className="absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric/10 blur-[110px]" />
       <div className="absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow-cyan/5 blur-[40px]" />
 
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[22rem] w-[22rem] -translate-x-1/2 -translate-y-1/2">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[22rem] w-[22rem] -translate-x-1/2 -translate-y-1/2 lg:h-[24rem] lg:w-[24rem]">
         <div className="animate-orbit absolute inset-0 rounded-full border border-line/80">
           <span className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow-cyan/80" />
           <span className="absolute right-4 bottom-6 h-1.5 w-1.5 rounded-full bg-electric/70" />
         </div>
-        <div className="animate-orbit-reverse absolute inset-10 rounded-full border border-line/60 xl:inset-24">
+        <div className="animate-orbit-reverse absolute inset-6 rounded-full border border-line/60 lg:inset-10 xl:inset-24">
           <span className="absolute right-1 top-4 h-1.5 w-1.5 rounded-full bg-glow-teal/70" />
         </div>
       </div>
 
       {/* Video showcase */}
-      <div className="animate-float-slow relative mx-auto w-full max-w-[520px]">
-        <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-panel shadow-[0_50px_120px_-40px_rgba(59,130,246,0.35)]">
-          <video
-            className="aspect-square w-full object-cover"
-            src="/dreamina-node.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-hidden="true"
-          />
-          <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/10" />
+      <div className="flex w-full items-center justify-center lg:min-h-[30rem]">
+        <div className="animate-float-slow relative mx-auto w-full max-w-[520px]">
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-panel shadow-[0_50px_120px_-40px_rgba(59,130,246,0.35)]">
+            <video
+              className="aspect-video w-full object-cover"
+              src="/dreamina-node.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-hidden="true"
+            />
+            <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/10" />
+          </div>
         </div>
       </div>
 
