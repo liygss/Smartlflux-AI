@@ -221,17 +221,17 @@ export const waterKpi = [
   { label: 'Konsumsi Puncak', value: '14 m³', tone: 'indigo' },
 ]
 
-export const recommendations = [
-  {
-    type: 'electricity',
-    title: 'Electricity Recommendation',
-    text: 'Konsumsi listrik meningkat 18% pada pukul 22:00–01:00 dibandingkan baseline. Periksa peralatan yang tetap aktif setelah jam operasional.',
-  },
-  {
-    type: 'water',
-    title: 'Water Recommendation',
-    text: 'Penggunaan air pada pukul 01:00–03:00 berada di atas pola normal. Lakukan pengecekan pada area dengan penggunaan air kontinu.',
-  },
+export const electricityNight = [
+  { t: '22:00', e: 34 },
+  { t: '23:00', e: 38 },
+  { t: '00:00', e: 31 },
+  { t: '01:00', e: 29 },
+]
+
+export const waterNight = [
+  { t: '01:00', v: 6 },
+  { t: '02:00', v: 5 },
+  { t: '03:00', v: 4 },
 ]
 
 export const efficiency = { score: 82, level: 'Efisien' }

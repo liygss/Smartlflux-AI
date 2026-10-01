@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import { FileText, FileSpreadsheet, Calendar, Printer, Zap, Droplets, Activity, TrendingDown } from 'lucide-react'
+import { FileText, FileSpreadsheet, Calendar, Printer, Zap, Droplets, Activity, TrendingDown, Lightbulb, LineChart } from 'lucide-react'
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts'
 import { SectionCard, PageTitle } from '../common'
+import { PriorityBadge } from '../RecommendationCard'
+import { PredictionDetailList } from '../PredictionCard'
+import { recommendations, summaryCounts, priorityMeta, domainMeta, recStatusMeta } from '../recommendations'
+import { predictions, summaryByHorizon, confidenceMeta } from '../predictions'
 import { ChartTooltip } from '../charts'
 import { gridColor, gridDash, axisTick, seriesColors } from '../chartStyle'
 
@@ -15,16 +19,19 @@ const previewData = [
   { d: 'Min', e: 88, v: 34 },
 ]
 
-export default function ReportsSection() {
+export default function ReportsSection({ recStatuses = {} }) {
   const [period, setPeriod] = useState('Bulanan')
   const periods = ['Harian', 'Mingguan', 'Bulanan', 'Rentang Tanggal Kustom']
+  const recCounts = summaryCounts()
+  const horizonRows = summaryByHorizon()
   const reportRows = [
     { label: 'Total Konsumsi Listrik', value: '125.4 kWh' },
     { label: 'Total Konsumsi Air', value: '45.6 m³' },
     { label: 'Pemakaian Puncak', value: '18:00 · 52 kWh' },
     { label: 'Anomali Terdeteksi', value: '2 Potensi Anomali' },
     { label: 'Perbandingan Tren', value: '-6.7% vs baseline' },
-    { label: 'Rekomendasi', value: '2 rekomendasi tersedia' },
+    { label: 'Prediksi', value: `${predictions.length} proyeksi · ${horizonRows.map((h) => h.horizon).join(', ')}` },
+    { label: 'Rekomendasi', value: `${recCounts.total} rekomendasi · ${recCounts.high} prioritas tinggi` },
   ]
 
   const tiles = [
@@ -37,7 +44,42 @@ export default function ReportsSection() {
   const exportCsv = () => {
     const header = 'Laporan,Periode'
     const rows = reportRows.map((r) => `"${r.label}","${r.value}"`).join('\n')
-    const blob = new Blob([`${header}\n${period},Demo\n\n${rows}\n`], { type: 'text/csv;charset=utf-8;' })
+    const recHeader = 'Prioritas,Domain,Rekomendasi,Dasar,Langkah,Dampak,Sumber,Status'
+    const recRows = recommendations
+      .map((rec) =>
+        [
+          priorityMeta[rec.priority].label,
+          domainMeta[rec.domain].label,
+          rec.title,
+          rec.reason,
+          rec.actions.join(' | '),
+          `${rec.impact.label}: ${rec.impact.value}`,
+          rec.source?.label ?? '-',
+          recStatusMeta[recStatuses[rec.id] ?? rec.status].label,
+        ]
+          .map((cell) => `"${String(cell).replace(/"/g, '""')}"`)
+          .join(',')
+      )
+      .join('\n')
+    const predHeader = 'Periode,Domain,Proyeksi,Nilai,Rentang,Keyakinan,Dasar Data,Metode'
+    const predRows = predictions
+      .map((pred) =>
+        [
+          pred.horizon,
+          domainMeta[pred.domain].label,
+          pred.title,
+          pred.value,
+          pred.range,
+          `${pred.confidence}% ${confidenceMeta(pred.confidence).label}`,
+          pred.basis,
+          pred.method,
+        ]
+          .map((cell) => `"${String(cell).replace(/"/g, '""')}"`)
+          .join(',')
+      )
+      .join('\n')
+    const block = `\n\n${recHeader}\n${recRows}\n\n${predHeader}\n${predRows}\n`
+    const blob = new Blob([`${header}\n${period},Demo\n\n${rows}\n${block}`], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -181,6 +223,85 @@ export default function ReportsSection() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Rincian prediksi */}
+      <div className="mt-4">
+        <SectionCard
+          title="Rincian Prediksi"
+          subtitle="Proyeksi per periode beserta rentang, tingkat keyakinan, dasar data, dan metode perhitungan"
+          icon={LineChart}
+          footer={
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-fx-secondary">
+              <span>
+                {predictions.length} proyeksi untuk {horizonRows.map((h) => h.horizon).join(', ')}
+              </span>
+              <span className="text-muted">Rentang bukan target konsumsi</span>
+            </div>
+          }
+        >
+          <PredictionDetailList items={predictions} />
+        </SectionCard>
+      </div>
+
+      {/* Rincian rekomendasi */}
+      <div className="mt-4">
+        <SectionCard
+          title="Rincian Rekomendasi"
+          subtitle="Dasar perhitungan, langkah penanganan, dan perkiraan dampak setiap rekomendasi pada periode ini"
+          icon={Lightbulb}
+          footer={
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-fx-secondary">
+              <span>
+                {recCounts.total} rekomendasi · {recCounts.high} prioritas tinggi · {recCounts.medium} sedang ·{' '}
+                {recCounts.low} rendah
+              </span>
+              <span className="text-muted">Ikuti langkah penanganan di halaman Ringkasan</span>
+            </div>
+          }
+        >
+          <div className="space-y-2.5">
+            {recommendations.map((rec) => (
+              <div key={rec.id} className="rounded-xl border border-line bg-panel/60 p-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-md border border-line bg-white/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-fx-muted">
+                    {domainMeta[rec.domain].label}
+                  </span>
+                  <PriorityBadge level={rec.priority} />
+                  <span
+                    className={`rounded-md px-2.5 py-1 text-[11px] font-semibold ${
+                      recStatusMeta[recStatuses[rec.id] ?? rec.status].tone
+                    }`}
+                  >
+                    {recStatusMeta[recStatuses[rec.id] ?? rec.status].label}
+                  </span>
+                </div>
+
+                <p className="mt-1.5 text-sm font-semibold text-fx-text">{rec.title}</p>
+                <p className="mt-1 text-xs leading-relaxed text-fx-secondary">{rec.reason}</p>
+
+                <ol className="mt-2.5 space-y-1.5 border-l-2 border-electric/30 pl-3.5">
+                  {rec.actions.map((action, i) => (
+                    <li key={action} className="flex gap-2.5 text-xs leading-relaxed text-fx-secondary">
+                      <span className="tabular-nums font-semibold text-electric">{i + 1}.</span>
+                      <span>{action}</span>
+                    </li>
+                  ))}
+                </ol>
+
+                <p className="mt-2.5 text-[11px] text-fx-muted">
+                  <span className="font-semibold text-fx-secondary">{rec.impact.label}:</span>{' '}
+                  {rec.impact.value}
+                  {rec.source && (
+                    <>
+                      {' · '}Sumber: {rec.source.label}
+                    </>
+                  )}
+                </p>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
       </div>
     </div>
   )

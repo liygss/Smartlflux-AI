@@ -12,6 +12,7 @@ import {
   Legend,
 } from 'recharts'
 import { analyticsTrend, efficiency } from '../data'
+import { weekAheadElectricity, weekAheadWater, confidenceMeta } from '../predictions'
 import { SectionCard, PageTitle } from '../common'
 import { ChartTooltip } from '../charts'
 import { gridColor, gridDash, axisTick, seriesColors } from '../chartStyle'
@@ -52,6 +53,7 @@ export default function AnalyticsSection() {
   const level = efficiency.level
   const levelColor = level === 'Efisien' ? 'text-mint' : level === 'Normal' ? 'text-electric' : 'text-fx-warning'
   const ringColor = level === 'Efisien' ? seriesColors.emerald : level === 'Normal' ? seriesColors.electricity : '#f59e0b'
+  const weekConfidence = confidenceMeta(weekAheadElectricity.confidence)
 
   return (
     <div>
@@ -139,7 +141,12 @@ export default function AnalyticsSection() {
           </span>
           <div>
             <p className="text-sm font-semibold text-fx-text">Prediksi 7 hari</p>
-            <p className="text-xs text-fx-secondary">Listrik ~875 kWh · Air ~318 m³</p>
+            <p className="text-xs text-fx-secondary">
+              Listrik {weekAheadElectricity.total} kWh · Air {weekAheadWater.total} m³
+            </p>
+            <p className={`mt-1 text-[11px] font-semibold ${weekConfidence.text}`}>
+              Keyakinan {weekAheadElectricity.confidence}% {weekConfidence.label.toLowerCase()}
+            </p>
           </div>
         </div>
       </div>

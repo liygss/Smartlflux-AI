@@ -71,6 +71,9 @@ export function StatusBadge({ level, label }) {
     critical: { cls: 'bg-fx-critical/15 text-red-300', dot: 'bg-fx-critical', label: 'Kritis' },
     online: { cls: 'bg-mint/15 text-mint', dot: 'bg-mint', label: 'Terhubung' },
     offline: { cls: 'bg-white/10 text-fx-muted', dot: 'bg-gray-500', label: 'Terputus' },
+    new: { cls: 'border border-electric/30 bg-electric/15 text-sky-300', dot: 'bg-electric', label: 'Baru' },
+    progress: { cls: 'border border-line bg-white/10 text-fx-secondary', dot: 'bg-fx-warning', label: 'Diikuti' },
+    done: { cls: 'bg-mint/15 text-mint', dot: 'bg-mint', label: 'Selesai' },
   }
   const s = map[level] || map.normal
   return (

@@ -12,6 +12,7 @@ import SettingsSection from '../components/dashboard/sections/SettingsSection'
 export default function Dashboard() {
   const [active, setActive] = useState('overview')
   const [role, setRole] = useState('admin')
+  const [recStatuses, setRecStatuses] = useState({})
 
   const roleSections = {
     admin: ['overview', 'electricity', 'water', 'alerts', 'analytics', 'reports', 'devices', 'settings'],
@@ -34,10 +35,21 @@ export default function Dashboard() {
     if (!roleSections[next].includes(active)) setActive('overview')
   }
 
+  const setRecStatus = (id, status) => {
+    setRecStatuses((prev) => ({ ...prev, [id]: status }))
+  }
+
   const Active = sections[active]
   return (
     <DashboardShell active={active} onNavigate={setActive} role={role} onRoleChange={changeRole}>
-      <Active key={active} active={active} onNavigate={setActive} role={role} />
+      <Active
+        key={active}
+        active={active}
+        onNavigate={setActive}
+        role={role}
+        recStatuses={recStatuses}
+        onRecStatusChange={setRecStatus}
+      />
     </DashboardShell>
   )
 }

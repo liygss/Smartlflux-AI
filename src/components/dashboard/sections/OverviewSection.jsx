@@ -7,6 +7,10 @@ import {
   Wifi,
   Activity,
   ArrowRight,
+  Filter,
+  Lightbulb,
+  ChevronDown,
+  LineChart,
 } from 'lucide-react'
 import {
   AreaChart,
@@ -20,6 +24,10 @@ import {
   ReferenceDot,
 } from 'recharts'
 import { kpi, electricityHourly, waterHourly, alerts, devices } from '../data'
+import { recommendations, summaryCounts, priorityMeta } from '../recommendations'
+import { predictions, summaryByHorizon } from '../predictions'
+import { RecommendationList } from '../RecommendationCard'
+import { PredictionGrid } from '../PredictionCard'
 import { KpiCard, SectionCard, StatusBadge, PageTitle } from '../common'
 import { ChartTooltip } from '../charts'
 import { gridColor, gridDash, axisTick, seriesColors } from '../chartStyle'
@@ -44,9 +52,31 @@ function useLive(base, step) {
   return v
 }
 
-export default function OverviewSection({ onNavigate, role = 'admin' }) {
+export default function OverviewSection({ onNavigate, role = 'admin', recStatuses = {}, onRecStatusChange }) {
   const liveElec = useLive(125.4, 0.6)
   const liveWater = useLive(45.6, 0.4)
+  const [recFilter, setRecFilter] = useState('Semua')
+  const [showAllRec, setShowAllRec] = useState(false)
+  const [horizonFilter, setHorizonFilter] = useState('Semua')
+
+  const horizons = [
+    { label: 'Semua', value: null },
+    ...summaryByHorizon().map((row) => ({ label: row.horizon, value: row.horizon })),
+  ]
+  const activeHorizon = horizons.find((h) => h.label === horizonFilter)?.value
+  const shownPredictions = predictions.filter((p) => !activeHorizon || p.horizon === activeHorizon)
+
+  const counts = summaryCounts()
+  const recFilters = [
+    { label: 'Semua', key: null, count: counts.total },
+    { label: 'Tinggi', key: 'high', count: counts.high },
+    { label: 'Sedang', key: 'medium', count: counts.medium },
+    { label: 'Rendah', key: 'low', count: counts.low },
+  ]
+  const activeFilter = recFilters.find((f) => f.label === recFilter)
+  const visibleRecs = recommendations.filter((r) => !activeFilter?.key || r.priority === activeFilter.key)
+  const shownRecs =
+    showAllRec || recFilter !== 'Semua' ? visibleRecs : visibleRecs.slice(0, 3)
 
   const alertTone = {
     critical: 'bg-fx-critical/15 text-red-300',
@@ -185,6 +215,98 @@ export default function OverviewSection({ onNavigate, role = 'admin' }) {
               </ResponsiveContainer>
             </div>
           </div>
+        </SectionCard>
+      </div>
+
+      {/* Prediksi */}
+      <div className="mt-4">
+        <SectionCard
+          title="Prediksi"
+          subtitle="Proyeksi konsumsi listrik dan air beserta rentang dan tingkat keyakinan"
+          icon={LineChart}
+          action={
+            <div className="segmented">
+              <span className="mr-1 hidden items-center gap-1 self-center pl-2 text-xs font-medium text-fx-secondary sm:flex">
+                Periode:
+              </span>
+              {horizons.map((h) => (
+                <button
+                  key={h.label}
+                  onClick={() => setHorizonFilter(h.label)}
+                  className="seg-opt"
+                  aria-pressed={horizonFilter === h.label}
+                >
+                  {h.label}
+                </button>
+              ))}
+            </div>
+          }
+          footer={
+            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-xs text-fx-secondary">
+              <span>Rentang menunjukkan batas-keyakinan, bukan target konsumsi.</span>
+              <span className="text-muted">
+                {shownPredictions.length} dari {predictions.length} proyeksi
+              </span>
+            </div>
+          }
+        >
+          <PredictionGrid items={shownPredictions} />
+        </SectionCard>
+      </div>
+
+      {/* Rekomendasi */}
+      <div className="mt-4">
+        <SectionCard
+          title="Rekomendasi"
+          subtitle="Langkah penanganan yang dihitung otomatis dari pola konsumsi, anomali, dan kesehatan perangkat"
+          icon={Lightbulb}
+          action={
+            <div className="segmented">
+              <span className="mr-1 hidden items-center gap-1 self-center pl-2 text-xs font-medium text-fx-secondary sm:flex">
+                <Filter size={13} /> Prioritas:
+              </span>
+              {recFilters.map((f) => (
+                <button
+                  key={f.label}
+                  onClick={() => setRecFilter(f.label)}
+                  className="seg-opt"
+                  aria-pressed={recFilter === f.label}
+                >
+                  {f.label}
+                  <span className="ml-1 opacity-70">{f.count}</span>
+                </button>
+              ))}
+            </div>
+          }
+          footer={
+            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-xs text-fx-secondary">
+              <div className="flex flex-wrap items-center gap-3">
+                {['high', 'medium', 'low'].map((level) => (
+                  <span key={level} className="flex items-center gap-1.5">
+                    <span className={`h-2 w-2 rounded-full ${priorityMeta[level].dot}`} />
+                    {counts[level]} {priorityMeta[level].label.toLowerCase()}
+                  </span>
+                ))}
+              </div>
+              {visibleRecs.length > 3 && recFilter === 'Semua' && (
+                <button
+                  onClick={() => setShowAllRec((v) => !v)}
+                  className="inline-flex items-center gap-1 font-semibold text-electric transition-colors hover:underline"
+                  aria-expanded={showAllRec}
+                >
+                  {showAllRec ? 'Tampilkan ringkas' : `Tampilkan semua (${visibleRecs.length})`}
+                  <ChevronDown size={13} className={`transition-transform ${showAllRec ? 'rotate-180' : ''}`} />
+                </button>
+              )}
+            </div>
+          }
+        >
+          <RecommendationList
+            items={shownRecs}
+            statuses={recStatuses}
+            onStatusChange={onRecStatusChange}
+            emptyLabel={`Tidak ada rekomendasi prioritas ${recFilter.toLowerCase()}`}
+          />
         </SectionCard>
       </div>
 
